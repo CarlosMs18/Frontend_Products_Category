@@ -1,1 +1,52 @@
-<p>sidebar works!</p>
+
+
+<a href="#" class="brand">
+    <i class='bx bxs-smile'></i>
+    <span class="text">AdminHub</span>
+</a>
+<ul class="side-menu top">
+    <li  *ngFor="let item of enlacesSidebarTop">
+        <a [routerLink]="item.ruta" routerLinkActive="active">
+            <i class='{{item.icono}}' ></i>
+            <span class="text">{{item.nombre}}</span>
+        </a>
+    </li>
+   <!--  <li class="active">
+        <a routerLink="#">
+            <i class='bx bxs-dashboard' ></i>
+            <span class="text">Dashboard</span>
+        </a>
+    </li>
+    <li>
+        <a routerLinkActive="active">
+            <i class='bx bxs-shopping-bag-alt' ></i>
+            <span class="text">My Store</span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class='bx bxs-doughnut-chart' ></i>
+            <span class="text">Analytics</span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class='bx bxs-message-dots' ></i>
+            <span class="text">Message</span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class='bx bxs-group' ></i>
+            <span class="text">Team</span>
+        </a>
+    </li> -->
+</ul>
+<ul class="side-menu">
+    <li *ngFor="let item of enlacesSidebarBot">
+        <a routerLink="#" class="{{item.class}}">
+            <i class='{{item.icono}}' ></i>
+            <span class="text">{{item.nombre}}</span>
+        </a>
+    </li>
+</ul>

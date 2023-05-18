@@ -1,3 +1,4 @@
+
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
 allSideMenu.forEach(item=> {
@@ -17,9 +18,10 @@ allSideMenu.forEach(item=> {
 // TOGGLE SIDEBAR
 const menuBar = document.querySelector('#content nav .bx.bx-menu');
 const sidebar = document.getElementById('sidebar');
-
+const content = document.getElementById('content')
 menuBar.addEventListener('click', function () {
 	sidebar.classList.toggle('hide');
+	
 })
 
 
@@ -74,3 +76,7 @@ switchMode.addEventListener('change', function () {
 		document.body.classList.remove('dark');
 	}
 })
+
+
+
+/* customInitFunctions(); */
