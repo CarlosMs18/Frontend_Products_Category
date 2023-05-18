@@ -14,7 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductsComponent implements OnInit {
 
-
+  public dataProduct   : productTable[] = []
   public displayColumns : string[] = ['id','nombre','price','account','category','actions']
   public dataSource = new MatTableDataSource<productTable>()
 
@@ -45,15 +45,30 @@ export class ProductsComponent implements OnInit {
       const {metadata , productResponse : {product}} = data
      
       
-      const dataProduct : productTable[] = []
+    
       if(metadata[0].code == "00"){
         product.forEach((element : any)=> {       
           element.category = element.category.nombre;
-          dataProduct.push(element) 
+          this.dataProduct.push(element) 
         })
-        this.dataSource = new MatTableDataSource<productTable>(dataProduct);
+        this.dataSource = new MatTableDataSource<productTable>(this.dataProduct);
         this.dataSource.paginator = this.paginator;
       }
+  }
+
+
+  eliminarProduct(id : number){
+    this.productService.deleteProduct(id)
+          .subscribe(
+            {
+              next : resp => {
+                this.dataProduct = this.dataProduct.filter(data => data.id != id);
+                this.dataSource = new MatTableDataSource<productTable>(this.dataProduct);
+                this.dataSource.paginator = this.paginator;
+               
+              }
+            }
+          )
   }
 }
 

@@ -44,6 +44,7 @@ export class CategoryComponent implements OnInit {
       const {metadata, categoryResponse : {category}} = data;
 
       if(metadata[0].code == "00"){
+        console.log('ok')
         let dataCategory : categoryTable[] = [];
         category.forEach((element : any) => {
           dataCategory.push(element);

@@ -1,0 +1,30 @@
+mat-card-content{
+    background: var(--light);
+    
+}
+
+table{
+    background: var(--light);
+
+}
+
+.cabecera__table-th{
+    font-family: var(--poppins);
+    text-align: center;
+    color: var(--dark);
+    
+}
+
+.cabecera__table-td{
+    font-family: var(--poppins);
+    text-align: center;
+    color: var(--dark);
+}
+.table__iconos{
+    text-align: center;
+}
+
+mat-paginator{
+    background: var(--light);
+    color: var(--dark);
+}

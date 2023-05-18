@@ -519,17 +519,71 @@ body {
 /* CONTENT */
 
 
-mat-card-content table th{
-    font-family:  var(--poppins);
-	background-color: red;
+mat-card{
+    margin-top: 20px;
+    width: 100%;
+  /*   border-radius: 20px;
+    overflow: hidden; */
+    background: var(--dark);
 }
 
-.cabecera__table{
-    background-color: red;
-	color: red;
+
+mat-card-content{
+    background: var(--light);
+    
+}
+
+table{
+    background: var(--light);
+
+}
+
+.cabecera__table-th{
+   
+    font-family: var(--poppins);
+    color: var(--dark);
+    font-size: 16px;
+    text-align: center;
+    padding: 18px;
+    font-weight: 700;
 }
 
 
+.cabecera__table-td{
+ 
+    font-family: var(--poppins);
+    color: var(--dark);
+    font-size: 16px;
+    text-align: center;
+    padding: 18px;
+   
+}
+
+.table__iconos{
+    text-align: center;
+}
+
+.icon__edit{
+   color: var(--blue);
+}
+
+.icon__delete{
+    color: var(--orange);
+}
+
+mat-paginator{
+    background: var(--light);
+    color: var(--dark);
+}
+
+
+@media screen and (max-width: 960px) {
+   
+
+    mat-card-content{
+        width: 1100px;
+    }
+}
 
 
 
