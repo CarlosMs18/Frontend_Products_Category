@@ -16,7 +16,7 @@ export class ProductService {
   constructor(private http : HttpClient) { }
 
   public getProducts() {
-    console.log(`${this.base_url}/products`);
+    
     return this.http.get<ProductResponse>(`${this.base_url}/products`)
       .pipe(
         tap(data => console.log(data))

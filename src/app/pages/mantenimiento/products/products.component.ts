@@ -35,9 +35,8 @@ export class ProductsComponent implements OnInit {
     .subscribe(
       {
         next : (data : ProductResponse) => {
-          console.log(data)
           this.procesandoCategoriesResponse(data);
-          /* console.log */
+         
         }
       }
     )
@@ -52,15 +51,9 @@ export class ProductsComponent implements OnInit {
           element.category = element.category.nombre;
           dataProduct.push(element) 
         })
-
         this.dataSource = new MatTableDataSource<productTable>(dataProduct);
         this.dataSource.paginator = this.paginator;
-
       }
-
-
-
-      console.log(dataProduct)
   }
 }
 
