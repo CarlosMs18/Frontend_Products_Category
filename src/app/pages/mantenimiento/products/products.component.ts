@@ -6,7 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 
 import { ProductService } from 'src/app/services/product.service';
-
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -23,9 +24,10 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService : ProductService,
-  
+    private toastr : ToastrService,
+    private dialog : MatDialog
   ){
-   
+
   }
   ngOnInit(): void {
     this.getProducts()
@@ -35,21 +37,25 @@ export class ProductsComponent implements OnInit {
     .subscribe(
       {
         next : (data : ProductResponse) => {
+          console.log(data)
           this.procesandoCategoriesResponse(data);
-         
+
         }
       }
     )
   }
   procesandoCategoriesResponse(data : ProductResponse){
       const {metadata , productResponse : {product}} = data
-     
-      
-    
+
+
+
       if(metadata[0].code == "00"){
-        product.forEach((element : any)=> {       
+        product.forEach((element : any)=> {
+
           element.category = element.category.nombre;
-          this.dataProduct.push(element) 
+
+          this.dataProduct.push(element)
+
         })
         this.dataSource = new MatTableDataSource<productTable>(this.dataProduct);
         this.dataSource.paginator = this.paginator;
@@ -58,17 +64,27 @@ export class ProductsComponent implements OnInit {
 
 
   eliminarProduct(id : number){
-    this.productService.deleteProduct(id)
-          .subscribe(
-            {
-              next : resp => {
-                this.dataProduct = this.dataProduct.filter(data => data.id != id);
-                this.dataSource = new MatTableDataSource<productTable>(this.dataProduct);
-                this.dataSource.paginator = this.paginator;
-               
-              }
-            }
-          )
+
+    const dialogRef = this.dialog.open(ConfirmComponent,{
+        data : {id},
+        width :'450px'
+    })
+
+    dialogRef.afterClosed().subscribe((result : number)=> {
+      console.log(result)
+      if(result == 1){
+        this.toastr.info(`El producto N° ${id} fue eliminado con exito`, "producto eliminado");
+        this.dataProduct = this.dataProduct.filter(data => data.id != id);
+        this.dataSource = new MatTableDataSource<productTable>(this.dataProduct);
+        this.dataSource.paginator = this.paginator;
+        return;
+      }else if(result == 2){
+        this.toastr.error(`Se produjo un error al eliminar el producto ${id}`)
+      }
+
+    })
+
+
   }
 }
 

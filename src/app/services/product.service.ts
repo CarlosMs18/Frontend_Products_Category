@@ -18,6 +18,9 @@ export class ProductService {
   public getProducts() {
     
     return this.http.get<ProductResponse>(`${this.base_url}/products`)
+      .pipe(
+        tap(data =>console.log(data))
+      )
   }
 
   public deleteProduct(id : number){

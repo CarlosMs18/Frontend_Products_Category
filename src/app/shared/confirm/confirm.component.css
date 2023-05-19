@@ -1,0 +1,29 @@
+.cuadro__confirmacion{
+  background: var(--light);
+  text-align: center;
+}
+
+
+.cuadro__confirmacion h1{
+   color: var(--dark);
+}
+
+.cuadro__confirmacion p{
+  color: var(--dark);
+}
+
+.cuadro__accion{
+  display: flex;
+  justify-content: center;
+
+}
+
+.button_yes{
+  background-color:rgb(63, 178, 63);
+  color: white;
+
+}
+
+.button_no{
+  background-color: rgb(152, 52, 52);
+}

@@ -1,0 +1,15 @@
+<div class="cuadro__confirmacion">
+  <h1 mat-dialog-title>Confirmacion</h1>
+
+<div mat-dialog-content>
+    <p>¿Éstas seguro de eliminar el registro?</p>
+</div>
+<div mat-dialog-actions class="cuadro__accion"  >
+
+
+    <button mat-button (click)="delete()" class="button_yes"  cdkFocusInitial>Si</button>
+
+    <button mat-button (click)="onNoClick()" class="button_no" >No</button>
+</div>
+
+</div>

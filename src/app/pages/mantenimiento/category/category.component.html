@@ -36,8 +36,8 @@
                   </button>
       
       
-                  <button mat-icon-button color="accent">
-                    <mat-icon aria-label="Delete" class="icon__delete">delete</mat-icon>
+                  <button mat-icon-button color="accent" (click)="eliminarCategory(element.id)">
+                    <mat-icon aria-label="Delete"  class="icon__delete">delete</mat-icon>
                 </button>
                 </td>
             </ng-container>

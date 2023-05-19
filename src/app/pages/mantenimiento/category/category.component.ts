@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CategoryComponent implements OnInit {
 
-
+  public dataCategory : categoryTable[] = [];
   public displayColumns : string[] = ['id', 'nombre','descripcion', 'actions'];
   public dataSource = new MatTableDataSource<categoryTable>();
 
@@ -45,15 +45,29 @@ export class CategoryComponent implements OnInit {
 
       if(metadata[0].code == "00"){
         console.log('ok')
-        let dataCategory : categoryTable[] = [];
+       
         category.forEach((element : any) => {
-          dataCategory.push(element);
+          this.dataCategory.push(element);
         })
       
-        this.dataSource = new MatTableDataSource<categoryTable>(dataCategory),
+        this.dataSource = new MatTableDataSource<categoryTable>(this.dataCategory),
         this.dataSource.paginator = this.paginator;
       }
 
+  }
+
+
+  eliminarCategory(id : number){
+     this.categoryService.deleteCategories(id)
+        .subscribe(
+          {
+            next : resp => {
+              this.dataCategory = this.dataCategory.filter(data => data.id != id);
+              this.dataSource = new MatTableDataSource<categoryTable>(this.dataCategory)
+              this.dataSource.paginator = this.paginator;
+            }
+          }
+        )
   }
 
 }

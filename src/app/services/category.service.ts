@@ -13,4 +13,8 @@ export class CategoryService {
   public getCategories(){
     return this.http.get<CategoryResponse>(`${this.base_url}/categories`)
   }
+
+  public deleteCategories(id : number){
+    return this.http.delete<CategoryResponse>(`${this.base_url}/categories/${id}`)
+  }
 }

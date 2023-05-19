@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -11,16 +13,19 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
   declarations: [
     SidebarComponent,
     HeaderComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    ConfirmComponent
   ],
   exports: [
     SidebarComponent,
     HeaderComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MaterialModule
   ]
 })
 export class SharedModule { }
