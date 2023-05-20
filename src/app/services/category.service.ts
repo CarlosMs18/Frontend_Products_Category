@@ -15,10 +15,22 @@ export class CategoryService {
     return this.http.get<CategoryResponse>(`${this.base_url}/categories`);
   }
 
+  public getCategorieUnique(id : number){
+    return this.http.get<CategoryResponse>(`${this.base_url}/categories/${id}`);
+  }
+
   public postCategory(category : Category){
 
     return this.http.post<CategoryResponse>(`${this.base_url}/categories`, category);
   }
+
+
+  public updateCategory(category : Category){
+    console.log(`${this.base_url}/categories/${category.id}`)
+    return this.http.put<CategoryResponse>(`${this.base_url}/categories/${category.id}`, category);
+  }
+
+
 
   public deleteCategories(id : number){
     return this.http.delete<CategoryResponse>(`${this.base_url}/categories/${id}`);

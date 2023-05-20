@@ -9,6 +9,7 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/s
 import { ProductService } from 'src/app/services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
+import { NewProductComponent } from 'src/app/components/new-product/new-product.component';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -63,6 +64,18 @@ export class ProductsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }
   }
+
+
+  agregarProducto(){
+    const dialogRef = this.dialog.open(NewProductComponent, {
+      width :'450px'
+    })
+
+    dialogRef.afterClosed().subscribe((result : number) => {
+
+    })
+  }
+
 
 
   eliminarProduct(id : number){

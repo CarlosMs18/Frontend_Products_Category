@@ -22,7 +22,7 @@
         </div>
     </mat-card-header>
   </div>
-    <mat-card-content >
+    <mat-card-content>
         <table mat-table [dataSource]="dataSource" class="mat-cell">
              <!-- id column-->
              <ng-container matColumnDef="id">
@@ -54,7 +54,7 @@
             <ng-container matColumnDef="actions">
                 <th class="cabecera__table-th" mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td class="table__iconos" mat-cell *matCellDef="let element; let i=index;">
-                  <button mat-icon-button color="accent">
+                  <button mat-icon-button color="accent" (click)="editarCategory(element.id, element.nombre, element.descripcion)" >
                       <mat-icon aria-label="Edit" class="icon__edit" >edit</mat-icon>
                   </button>
 

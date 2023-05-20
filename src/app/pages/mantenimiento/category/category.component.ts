@@ -10,6 +10,7 @@ import { ConfirmService } from 'src/app/services/confirm.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 import { NewCategoryComponent } from 'src/app/components/new-category/new-category.component';
+import { Category } from 'src/app/interfaces/category.interface';
 
 @Component({
   selector: 'app-category',
@@ -55,8 +56,8 @@ export class CategoryComponent implements OnInit {
       const {metadata, categoryResponse : {category}} = data;
 
       if(metadata[0].code == "00"){
-        console.log('ok')
 
+        this.dataCategory = [];
         category.forEach((element : any) => {
           this.dataCategory.push(element);
         })
@@ -83,6 +84,25 @@ export class CategoryComponent implements OnInit {
     })
   }
 
+
+  editarCategory(id : number, nombre : string ,descripcion:string){
+
+    const dialogRef = this.dialog.open(NewCategoryComponent,{
+        data : {id, nombre, descripcion},
+        width:'450px'
+    })
+
+    dialogRef.afterClosed().subscribe((result : number) => {
+      if(result == 1){
+
+        this.toastr.success(`La categoria numero ${id} fue actualizada con exito`, "Categoria actualizada");
+        this.getCategory();
+      }else if(result == 2){
+
+        this.toastr.error(`Se produjo un error al actualizar la categoria`, "Error al actualizar Categoria")
+      }
+  })
+  }
 
 
   eliminarCategory(id : number){

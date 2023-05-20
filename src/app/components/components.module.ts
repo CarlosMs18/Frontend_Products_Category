@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { NewProductComponent } from './new-product/new-product.component';
 
 
 
 @NgModule({
   declarations: [
-    NewCategoryComponent
+    NewCategoryComponent,
+    NewProductComponent
   ],
   exports : [
-    NewCategoryComponent
+    NewCategoryComponent,
+    NewProductComponent
   ],
   imports: [
     CommonModule,
