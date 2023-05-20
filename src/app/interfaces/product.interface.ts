@@ -1,7 +1,7 @@
 import { Category} from "./category.interface";
 
 export interface Product{
-    id: number,
+    id? : number,
     nombre: string,
     price : number,
     account : number,

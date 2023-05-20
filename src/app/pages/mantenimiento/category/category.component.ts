@@ -5,6 +5,11 @@ import { CategoryResponse } from 'src/app/interfaces/category-response.interface
 import { CategoryService } from 'src/app/services/category.service';
 import { productTable } from '../products/products.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmService } from 'src/app/services/confirm.service';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
+import { NewCategoryComponent } from 'src/app/components/new-category/new-category.component';
 
 @Component({
   selector: 'app-category',
@@ -13,16 +18,20 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CategoryComponent implements OnInit {
 
+
   public dataCategory : categoryTable[] = [];
   public displayColumns : string[] = ['id', 'nombre','descripcion', 'actions'];
   public dataSource = new MatTableDataSource<categoryTable>();
 
   @ViewChild(MatPaginator)
   paginator! : MatPaginator;
-  
+
 
   constructor(
-    private categoryService : CategoryService
+    private categoryService : CategoryService,
+    private toastr : ToastrService ,
+    private dialog : MatDialog,
+    private ConfirmService : ConfirmService
   ){}
 
   ngOnInit(): void {
@@ -34,6 +43,8 @@ export class CategoryComponent implements OnInit {
     .subscribe(
       {
         next : (data : CategoryResponse) => {
+
+          console.log(data)
           this.processCategoriesResponse(data);
         }
       }
@@ -45,11 +56,11 @@ export class CategoryComponent implements OnInit {
 
       if(metadata[0].code == "00"){
         console.log('ok')
-       
+
         category.forEach((element : any) => {
           this.dataCategory.push(element);
         })
-      
+
         this.dataSource = new MatTableDataSource<categoryTable>(this.dataCategory),
         this.dataSource.paginator = this.paginator;
       }
@@ -57,17 +68,41 @@ export class CategoryComponent implements OnInit {
   }
 
 
+  agregarCategoria(){
+    const dialogRef = this.dialog.open(NewCategoryComponent, {
+      width :'450px'
+    })
+
+    dialogRef.afterClosed().subscribe((result : number) => {
+        if(result == 1){
+          this.toastr.success(`La categoria fue agregado con exito`, "Categoria nuevo");
+          this.getCategory();
+        }else if(result == 2){
+          this.toastr.error(`Se produjo un error al agregar la categoria`)
+        }
+    })
+  }
+
+
+
   eliminarCategory(id : number){
-     this.categoryService.deleteCategories(id)
-        .subscribe(
-          {
-            next : resp => {
-              this.dataCategory = this.dataCategory.filter(data => data.id != id);
-              this.dataSource = new MatTableDataSource<categoryTable>(this.dataCategory)
-              this.dataSource.paginator = this.paginator;
-            }
-          }
-        )
+    this.ConfirmService.entidad = 'categoria'
+    const dialogRef = this.dialog.open(ConfirmComponent,{
+      data : {id},
+      width :'450px'
+    })
+
+    dialogRef.afterClosed().subscribe((result : number ) => {
+      if(result == 1){
+
+        this.toastr.info(`La categoria con el  N° ${id} fue eliminado con exito`, "categoria eliminado");
+        this.dataCategory = this.dataCategory.filter(data => data.id != id);
+        this.dataSource = new MatTableDataSource<categoryTable>(this.dataCategory)
+        this.dataSource.paginator = this.paginator;
+      }else if(result == 2){
+        this.toastr.error(`Se produjo un error al eliminar la categoria ${id}`)
+      }
+    })
   }
 
 }

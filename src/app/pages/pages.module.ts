@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductsComponent } from './mantenimiento/products/products.component';
 import { CategoryComponent } from './mantenimiento/category/category.component';
 import { MaterialModule } from '../material/material.module';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -22,7 +23,8 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     RouterModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    ComponentsModule
   ]
 })
 export class PagesModule { }

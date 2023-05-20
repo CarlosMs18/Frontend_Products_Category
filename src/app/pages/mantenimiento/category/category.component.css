@@ -1,6 +1,6 @@
 mat-card-content{
     background: var(--light);
-    
+
 }
 
 table{
@@ -12,7 +12,7 @@ table{
     font-family: var(--poppins);
     text-align: center;
     color: var(--dark);
-    
+
 }
 
 .cabecera__table-td{
@@ -28,3 +28,32 @@ mat-paginator{
     background: var(--light);
     color: var(--dark);
 }
+
+.buscador__agregar{
+
+  display: flex;
+  justify-content: space-between;
+  align-items : center;
+  background: var(--light);
+  height: 150px;
+}
+
+
+.titulo__card{
+  margin : 0;
+  padding: 10px 0 0 20px;
+  color: var(--dark);
+  background: var(--light);
+
+}
+
+mat-label{
+
+}
+
+
+.label__field{
+  color: var(--dark);
+}
+
+
