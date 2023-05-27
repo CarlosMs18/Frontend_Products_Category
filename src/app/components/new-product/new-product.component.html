@@ -1,1 +1,107 @@
-<p>new-product works!</p>
+<div class="producto__formulario">
+  <h2>Nuevo Producto</h2>
+  <form class="producto__form" [formGroup]="productForm">
+    <div class="producto__input">
+      <label class="producto__label">Nombre</label>
+      <input type="text" placeholder="Nombre ..." formControlName="nombre"  >
+      <span class="text-danger"
+      *ngIf="productForm.get('nombre')?.hasError('required') && productForm.get('nombre')?.touched" >
+        El nombre del producto es <strong>requerido </strong>
+      </span>
+
+      <span class="text-danger"
+      *ngIf="productForm.get('nombre')?.hasError('minlength') && productForm.get('nombre')?.touched" >
+        El nombre del producto es <strong>muy corta</strong>
+      </span>
+
+    </div>
+
+    <div class="producto__input">
+      <label class="producto__label">Price</label>
+      <input type="number" formControlName="precio" min="0"   >
+
+      <span class="text-danger"
+      *ngIf="productForm.get('precio')?.hasError('required') && productForm.get('precio')?.touched" >
+        El precio del producto es <strong>requerido </strong>
+      </span>
+
+      <span class="text-danger"
+            *ngIf="productForm.get('precio')?.value == 0 && productForm.get('precio')?.touched" >
+        El precio del producto <strong>no puede ser 0</strong>
+      </span>
+
+
+      <span class="text-danger"
+      *ngIf="productForm.get('precio')?.value < 0 && productForm.get('precio')?.touched" >
+      El precio del producto <strong>no puede ser negativo</strong>
+    </span>
+    </div>
+
+    <div class="producto__input">
+      <label class="producto__label">Account</label>
+      <input type="number" formControlName="cantidad" min="0"  >
+
+      <span class="text-danger"
+      *ngIf="productForm.get('cantidad')?.hasError('required') && productForm.get('cantidad')?.touched" >
+        La cantidad del producto es <strong>requerido </strong>
+      </span>
+
+      <span class="text-danger"
+      *ngIf="productForm.get('cantidad')?.value == 0 && productForm.get('cantidad')?.touched" >
+        La cantidad del producto <strong>no puede ser 0</strong>
+      </span>
+
+
+      <span class="text-danger"
+      *ngIf="productForm.get('cantidad')?.value < 0 && productForm.get('cantidad')?.touched" >
+      La cantidad del producto <strong>no puede ser negativo</strong>
+      </span>
+      </div>
+
+
+      <div class="producto__input">
+        <label class="producto__label">Categoria</label>
+        <select formControlName="categoria" class="product__select" >
+            <!-- <option value="--- Seleccione una opción ---" ></option> -->
+           <option class="product__option" *ngFor="let cat of categories" [value]="cat.id">
+                {{cat.nombre}}
+           </option>
+
+
+        </select>
+        <span class="text-danger"
+          *ngIf="productForm.get('categoria')?.hasError('required') && productForm.get('categoria')?.touched" >
+          La categoria del producto es <strong>requerido </strong>
+        </span>
+        </div>
+
+
+
+    <div class="product__input-imagen">
+      <label class="producto__label">Imagen</label>
+       <input
+       type="file"
+       accept="image/png, image/jpeg"
+       formControlName="picture"
+       class="input__imagen"
+       (change)="onFileChanged($event)"
+       >
+    </div>
+    <span class="text-danger"
+          *ngIf="productForm.get('picture')?.dirty && productForm.get('picture')?.hasError('required') "  >
+          La foto del producto es <strong>requerido </strong>
+        </span>
+
+
+    <mat-dialog-actions class="product__buttons">
+      <button class="button__save" mat-button color="primary"  (click)="onSave()">
+          <mat-icon>save</mat-icon> Guardar
+      </button>
+
+      <button mat-button color="primary"  (click)="onCancel()"  >
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+  </mat-dialog-actions>
+
+  </form>
+</div>

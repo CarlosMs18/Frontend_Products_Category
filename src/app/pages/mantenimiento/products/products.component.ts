@@ -10,15 +10,17 @@ import { ProductService } from 'src/app/services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 import { NewProductComponent } from 'src/app/components/new-product/new-product.component';
+import { Category } from 'src/app/interfaces/category.interface';
+import { BusquedaService } from 'src/app/services/busqueda.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  public metodos : string[] = ['category', 'product']
+
   public dataProduct   : productTable[] = []
-  public displayColumns : string[] = ['id','nombre','price','account','category','actions']
+  public displayColumns : string[] = ['id','nombre','price','account','category','picture','actions']
   public dataSource = new MatTableDataSource<productTable>()
 
   @ViewChild(MatPaginator)
@@ -26,6 +28,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService : ProductService,
+    private busquedaService : BusquedaService,
     private toastr : ToastrService,
     private dialog : MatDialog,
     private confirmService : ConfirmService
@@ -41,28 +44,46 @@ export class ProductsComponent implements OnInit {
       {
         next : (data : ProductResponse) => {
           console.log(data)
-          this.procesandoCategoriesResponse(data);
+          this.procesandoProductsResponse(data);
 
         }
       }
     )
   }
-  procesandoCategoriesResponse(data : ProductResponse){
+  procesandoProductsResponse(data : ProductResponse){
       const {metadata , productResponse : {product}} = data
 
 
 
       if(metadata[0].code == "00"){
+        this.dataProduct = [];
         product.forEach((element : any)=> {
 
           element.category = element.category.nombre;
+          element.picture = 'data:image/jpeg;base64,'+element.picture;
+
 
           this.dataProduct.push(element)
 
         })
+
+
         this.dataSource = new MatTableDataSource<productTable>(this.dataProduct);
         this.dataSource.paginator = this.paginator;
       }
+  }
+
+  buscarProducto(valor : string){
+      if(valor.length === 0){
+        return this.getProducts();
+      }
+
+      this.busquedaService.buscar('products', valor)
+          .subscribe((resp : any) => {
+            console.log(resp)
+            this.procesandoProductsResponse(resp);
+          })
+
   }
 
 
@@ -73,6 +94,13 @@ export class ProductsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result : number) => {
 
+      if(result == 1){
+        this.toastr.success(`El producto fue agregado con exito`, "producto agregado");
+        this.getProducts();
+
+      }else if(result == 2){
+        this.toastr.error(`Se produjo un error al crear el producto`)
+      }
     })
   }
 
@@ -99,6 +127,23 @@ export class ProductsComponent implements OnInit {
     })
 
 
+  }
+
+
+  editarProduct(id : number, nombre : string , price : number, account : number, category : Category){
+      const dialogRef = this.dialog.open(NewProductComponent , {
+        data : {id,nombre, price ,account , category},
+        width : '450px'
+      })
+
+      dialogRef.afterClosed().subscribe((result : number) => {
+        if(result == 1){
+          this.toastr.success(`El producto numero ${id} fue actualizado con exito`, "producto actualizado");
+          this.getProducts();
+        } else if(result == 2){
+          this.toastr.error(`Se produjo un error al actualizar el producto numero ${id}`)
+        }
+      })
   }
 }
 

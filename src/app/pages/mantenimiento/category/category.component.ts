@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 import { NewCategoryComponent } from 'src/app/components/new-category/new-category.component';
 import { Category } from 'src/app/interfaces/category.interface';
+import { BusquedaService } from 'src/app/services/busqueda.service';
 
 @Component({
   selector: 'app-category',
@@ -30,6 +31,7 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private categoryService : CategoryService,
+    private busquedaService : BusquedaService,
     private toastr : ToastrService ,
     private dialog : MatDialog,
     private ConfirmService : ConfirmService
@@ -68,6 +70,15 @@ export class CategoryComponent implements OnInit {
 
   }
 
+  buscarCategoria(valor : string){
+    if(valor.length === 0){
+      return this.getCategory();
+    }
+    this.busquedaService.buscar('categories', valor)
+            .subscribe((categoria : any)=> {
+                this.processCategoriesResponse(categoria);
+            })
+  }
 
   agregarCategoria(){
     const dialogRef = this.dialog.open(NewCategoryComponent, {

@@ -1,0 +1,143 @@
+/* .titulo__principal{
+
+  background: var(--light);
+  color: var(--dark);
+  margin: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.nueva__categoria{
+  background: var(--light);
+
+}
+
+.category__input{
+  width: 100%;
+  height: 82px;
+  border: none;
+}
+
+.category__input input{
+  width: 100%;
+}
+
+.category__buttons{
+  padding: 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--light);
+}
+
+.button__save{
+  cursor: pointer;
+}
+
+ */
+
+ .producto__formulario{
+  background: var(--light);
+
+  padding: 18px;
+ }
+
+ .producto__formulario h2{
+  color: var(--dark);
+  text-align: center;
+ }
+ .producto__form{
+
+ }
+
+ .producto__input{
+   margin-bottom: 20px;
+ }
+
+ .producto__label{
+  text-align: left;
+  color: var(--dark);
+  display: inline-block;
+  margin-bottom: 5px;
+ }
+
+ .producto__input input{
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  height: 32px;
+  border: 1px solid rgba(60, 30, 195, 0.621);
+  padding: 0 10px;
+  font-family: var(--poppins);
+
+
+ /*  border: 1px solid var(--dark); */
+ }
+ .text-danger{
+  color: rgb(121, 51, 51);
+  margin-top: 8px;
+ }
+
+ .producto__textarea{
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  min-height: 50px;
+  max-height: 100px;
+  max-width: 100%;
+  border: 1px solid rgba(60, 30, 195, 0.621);
+  padding: 10px;
+  /* margin-bottom: 30px; */
+  font-family: var(--poppins);
+ }
+
+
+.product__select{
+  width: 100%;
+
+  border: none;
+  outline: none;
+  height: 32px;
+  border: 1px solid rgba(60, 30, 195, 0.621);
+  padding: 0 10px;
+  font-family: var(--poppins);
+}
+
+.product__option{
+  font-family: var(--poppins);
+  font-weight: 700;
+  display: block;
+  padding: 0 10px;
+  color: var(--dark);
+  background-color: var(--light);
+
+}
+
+
+ .product__input-imagen{
+    display: flex;
+    flex-direction: column;
+    font-family: var(--poppins);
+    color: var(--dark)
+ }
+
+ .input__imagen{
+  /* width: 100%; */
+
+ }
+
+ .product__buttons{
+  margin-top: 15px;
+  padding: 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--light);
+}
+
+
+

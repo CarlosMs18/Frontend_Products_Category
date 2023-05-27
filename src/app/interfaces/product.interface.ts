@@ -6,4 +6,5 @@ export interface Product{
     price : number,
     account : number,
     category: Category,
+    picture : File
 }

@@ -9,8 +9,8 @@ import { ScriptsService } from './services/scripts.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
-  
-  
+
+
 
   title = 'ProyectoBackendCategoryProduct';
 }

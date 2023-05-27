@@ -9,17 +9,17 @@ import { ScriptsService } from 'src/app/services/scripts.service';
   styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent {
-    
+
   public titulo : string = '';
   public tituloSubs$!: Subscription;
 
   constructor(private router : Router, private route : ActivatedRoute){
     this.tituloSubs$ =  this.getArgumentosRuta()
     .subscribe(({titulo}) => {
-      console.log(titulo)
+
       this.titulo = titulo;
      /*  this.titulo = titulo */
-    
+
      /*  document.title = `AdminPro - ${titulo}` */
 
 })
