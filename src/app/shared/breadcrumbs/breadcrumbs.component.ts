@@ -16,7 +16,7 @@ export class BreadcrumbsComponent {
   constructor(private router : Router, private route : ActivatedRoute){
     this.tituloSubs$ =  this.getArgumentosRuta()
     .subscribe(({titulo}) => {
-
+      console.log(this.titulo)
       this.titulo = titulo;
      /*  this.titulo = titulo */
 

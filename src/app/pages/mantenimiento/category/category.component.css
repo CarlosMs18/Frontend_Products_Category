@@ -57,3 +57,7 @@ mat-label{
 }
 
 
+.category__span{
+  color: rgb(226, 32, 32);
+  font-weight: bold;
+}

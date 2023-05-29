@@ -6,7 +6,8 @@
 </a>
 <ul class="side-menu top">
     <li  *ngFor="let item of enlacesSidebarTop">
-        <a [routerLink]="item.ruta" routerLinkActive="active">
+        <a [routerLink]="item.ruta" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
             <i class='{{item.icono}}' ></i>
             <span class="text">{{item.nombre}}</span>
         </a>

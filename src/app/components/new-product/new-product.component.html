@@ -63,7 +63,8 @@
         <label class="producto__label">Categoria</label>
         <select formControlName="categoria" class="product__select" >
             <!-- <option value="--- Seleccione una opción ---" ></option> -->
-           <option class="product__option" *ngFor="let cat of categories" [value]="cat.id">
+            <option value="" disabled>Seleccione una categoría</option>
+           <option class="product__option" *ngFor="let cat of categories" [value]="cat.id" >
                 {{cat.nombre}}
            </option>
 
@@ -79,6 +80,7 @@
 
     <div class="product__input-imagen">
       <label class="producto__label">Imagen</label>
+
        <input
        type="file"
        accept="image/png, image/jpeg"

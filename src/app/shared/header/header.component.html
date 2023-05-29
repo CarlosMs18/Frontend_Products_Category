@@ -8,7 +8,7 @@
             <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
         </div>
     </form>
-    <input type="checkbox" id="switch-mode" hidden>
+    <input type="checkbox" id="switch-mode" (change)="cambiarStatus()" [checked]="theme"  hidden>
     <label for="switch-mode" class="switch-mode"></label>
     <a href="#" class="notification">
         <i class='bx bxs-bell' ></i>

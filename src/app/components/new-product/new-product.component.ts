@@ -20,6 +20,7 @@ export class NewProductComponent implements OnInit{
 
   public productForm : FormGroup;
   public categories : Category[] = [];
+  public categoriaSeleccionada: Category | undefined;
   public selectedFile : any;
   public nombreImagen : string = '';
 
@@ -43,8 +44,17 @@ export class NewProductComponent implements OnInit{
   }
   ngOnInit(): void {
     if(this.data != null){
+      console.log('Ee')
+      console.log(this.data)
       this.formularioActualizado(this.data);
     }
+
+    this.productForm.get('categoria')?.valueChanges
+
+                  .subscribe((categoriaId : any) => {
+                    console.log('aca!11')
+                    this.categoriaSeleccionada= this.categories.find( h => h.id == categoriaId)
+                  })
   }
 
   getCategories(){
@@ -52,6 +62,7 @@ export class NewProductComponent implements OnInit{
         .subscribe(
           {
             next : (categorias:CategoryResponse) => {
+
                 this.categories = categorias.categoryResponse.category;
 
 
@@ -139,13 +150,15 @@ export class NewProductComponent implements OnInit{
   }
 
 
-  formularioActualizado(product : any){
-    this.productForm = this.fb.group({
-      nombre : [product.nombre,[Validators.required, Validators.minLength(6)]],
-      precio : [product.price , [Validators.required, Validators.min(0)]],
-      cantidad : [product.account , [Validators.required,Validators.min(0)]],
-      categoria : [product.category.id,Validators.required],
-      picture : ['', Validators.required]
-  })
+  formularioActualizado(product : Product){
+
+    this.productForm.setValue({
+      nombre : product.nombre,
+      precio : product.price,
+      cantidad : product.account,
+      categoria : product.category,
+      picture : ''
+    })
+
   }
 }

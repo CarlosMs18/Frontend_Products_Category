@@ -33,7 +33,7 @@ export class SidebarServiceService {
         icono : 'bx bxs-shopping-bag-alt',
         ruta : 'category'
       },
-      {
+    /*   {
         nombre : 'Analytics',
         icono : 'bx bxs-doughnut-chart',
         ruta : '#'
@@ -47,7 +47,7 @@ export class SidebarServiceService {
         nombre : 'Team',
         icono : 'bx bxs-group',
         ruta : '#'
-      }
+      } */
     ]
 
    }

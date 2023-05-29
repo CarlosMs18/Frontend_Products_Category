@@ -62,6 +62,7 @@ export class ProductsComponent implements OnInit {
           element.category = element.category.nombre;
           element.picture = 'data:image/jpeg;base64,'+element.picture;
 
+          console.log()
 
           this.dataProduct.push(element)
 

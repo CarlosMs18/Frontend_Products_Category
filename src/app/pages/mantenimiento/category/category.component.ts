@@ -24,6 +24,7 @@ export class CategoryComponent implements OnInit {
   public dataCategory : categoryTable[] = [];
   public displayColumns : string[] = ['id', 'nombre','descripcion', 'actions'];
   public dataSource = new MatTableDataSource<categoryTable>();
+  public categoriaInput : string  = '';
 
   @ViewChild(MatPaginator)
   paginator! : MatPaginator;
@@ -48,7 +49,9 @@ export class CategoryComponent implements OnInit {
         next : (data : CategoryResponse) => {
 
           console.log(data)
+
           this.processCategoriesResponse(data);
+
         }
       }
     )
@@ -71,12 +74,18 @@ export class CategoryComponent implements OnInit {
   }
 
   buscarCategoria(valor : string){
+    this.categoriaInput = valor;
     if(valor.length === 0){
+
       return this.getCategory();
     }
     this.busquedaService.buscar('categories', valor)
             .subscribe((categoria : any)=> {
                 this.processCategoriesResponse(categoria);
+                console.log(this.dataCategory)
+                if(this.dataCategory.length === 0){
+                  console.log('vacio!')
+                }
             })
   }
 
